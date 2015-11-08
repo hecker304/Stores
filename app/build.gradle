@@ -1,0 +1,40 @@
+apply plugin: 'com.android.application'
+
+android {
+    compileSdkVersion 23
+    buildToolsVersion "23.0.1"
+
+    signingConfigs {
+        releaseWithProps {
+            storeFile file(keystore)
+            storePassword keystore_pass
+        keyAlias key_alias
+        keyPassword key_pass
+        }
+    }
+
+    defaultConfig {
+        applicationId "org.test.kimcoka.startupapplications"
+        minSdkVersion 15
+        targetSdkVersion 23
+        versionCode 1
+        versionName "1.0"
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            signingConfig signingConfigs.releaseWithProps
+        }
+    }
+}
+
+dependencies {
+    compile fileTree(dir: 'libs', include: ['*.jar'])
+    testCompile 'junit:junit:4.12'
+    compile 'com.android.support:appcompat-v7:23.1.0'
+    compile 'com.android.support:design:23.1.0'
+    compile 'com.google.android.gms:play-services:+'
+    //compile project(":test2"); // 내부참조 ( 이클립스 libraryDependencies)
+}
+
